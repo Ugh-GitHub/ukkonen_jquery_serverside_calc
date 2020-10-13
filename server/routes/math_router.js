@@ -14,7 +14,8 @@ router.get( '/', ( req, res )=>{
     // GET data from the database
     let queryText = 'SELECT * FROM "history";';
     pool.query(queryText).then((result) => {
-        console.log('result from database', result);
+        // logs out ALL of the data from the database in the terminal (>.<)
+        //console.log('result from database', result);
         res.send( result.rows );
     });
 
