@@ -4,12 +4,20 @@ const express = require ('express');
 const router = express.Router();
 const history = require('../modules/history');
 // const bodyParser = require ('body-parser');
+const pool = require('../modules/pool');
 
 
 // get history
 router.get( '/', ( req, res )=>{
-    console.log( '/math GET hit' );
-    res.send( history );
+    // console.log( '/math GET hit' );
+    // res.send( history );
+    // GET data from the database
+    let queryText = 'SELECT * FROM "history";';
+    pool.query(queryText).then((result) => {
+        console.log('result from database', result);
+        res.send( result.rows );
+    });
+
 })
 
 router.post( '/', ( req, res )=>{
